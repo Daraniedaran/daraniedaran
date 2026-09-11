@@ -110,11 +110,53 @@
 
 ---
 
-### 🐍 Contribution Snake Animation
+### ✨ 3D Geometric Aura — Interactive Visual
+
+> GitHub READMEs block `<script>` / Three.js / WebGL, so the live 3D can't run inline. I hosted it as a full page and linked it here (GitHub-safe pattern).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Daraniedaran/Daraniedaran/output/github-snake-dark.svg" alt="snake animation"/>
+  <a href="https://daraniedaran.github.io/Daraniedaran/aura.html">
+    <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6,11,20&height=120&section=header&text=✦%203D%20GEOMETRIC%20AURA%20✦&fontSize=28&fontColor=88ccff&animation=fadeIn&fontAlignY=50" width="95%" alt="3D Geometric Aura banner"/>
+  </a>
+  <br/>
+  <a href="https://daraniedaran.github.io/Daraniedaran/aura.html"><img src="https://img.shields.io/badge/🌌_Launch_Interactive_3D-Drag_to_Rotate-58A6FF?style=for-the-badge&logo=three.js&logoColor=white" alt="launch 3d"/></a>
+  <a href="aura.html"><img src="https://img.shields.io/badge/View-aura.html-181717?style=for-the-badge&logo=github&logoColor=white" alt="aura file"/></a>
 </p>
+
+- 🖱️ **Drag to rotate, scroll to zoom** — auto-rotates with bloom + starfield + torus rings
+- 📁 Source: [`aura.html`](./aura.html) in this repo
+- 🚀 Live: `https://daraniedaran.github.io/Daraniedaran/aura.html` (enable Pages: Settings → Pages → Deploy from `main` → `/root`, then open the link)
+- 💡 Tip: screen-record 5s → `aura.gif` → replace banner above with `<img src="aura.gif">` for inline animation
+
+---
+
+### 🐍 Contribution Snake Animation
+
+<!-- Works only AFTER push + first workflow run. See fix notes below. -->
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Daraniedaran/Daraniedaran/output/github-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Daraniedaran/Daraniedaran/output/github-snake.svg" />
+    <img src="https://raw.githubusercontent.com/Daraniedaran/Daraniedaran/output/github-snake-dark.svg" alt="snake animation"/>
+  </picture>
+</p>
+
+<details>
+<summary>⚠️ Snake showing broken image? Click to fix (3 steps)</summary>
+
+1. Push these files first — workflow never ran locally, so `output` branch doesn't exist yet:
+   ```powershell
+   git add README.md aura.html .github/workflows/snake.yml
+   git commit -m "feat: profile README + aura + snake"
+   git branch -M main
+   git push -u origin main
+   ```
+2. Enable write permission: GitHub repo → **Settings → Actions → General → Workflow permissions → Read and write** → Save.
+3. Run manually: **Actions → Generate Snake Animation → Run workflow →** wait ~1 min → check `output` branch has `github-snake.svg` + `github-snake-dark.svg`. Refresh profile (hard refresh `Ctrl+Shift+R`).
+
+Workflow file: [`.github/workflows/snake.yml`](./.github/workflows/snake.yml) — runs daily + on push to `main` + manual dispatch.
+
+</details>
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%" alt="footer"/>

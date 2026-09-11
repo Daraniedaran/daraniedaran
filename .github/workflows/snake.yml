@@ -2,12 +2,11 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
   push:
     branches:
       - main
-      - master
 
 jobs:
   generate:
@@ -16,23 +15,31 @@ jobs:
     permissions:
       contents: write
     steps:
+      # 1. Checkout default branch (needed for gh-pages deploy action)
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate snake files
-        uses: Platane/snk/svg-only@v3
+      # 2. Generate snake SVGs (svg-only is faster, no gif to avoid failures)
+      # Uses repository_owner so fork-safe. Runs even with 0 contributions.
+      - name: Generate snake SVGs
+        uses: Platane/snk@v3
         with:
-          github_user_name: Daraniedaran
+          github_user_name: ${{ github.repository_owner }}
           outputs: |
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
-            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
 
+      # 3. Debug: show what was generated (check this in Actions logs if it fails)
+      - name: Show dist files
+        run: ls -lh dist/
+
+      # 4. Push SVGs to `output` branch (creates it if missing)
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist
           keep_history: true
+          commit_message: "chore: update snake animation"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
